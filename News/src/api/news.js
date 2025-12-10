@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const NEWS_API_KEY = "";
+const NEWS_API_KEY = "5a414439830d46f1bd17deec3ee790c8"; 
 
 export default async function handler(req, res) {
   const category = req.query.category || "general";
