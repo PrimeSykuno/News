@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NewsCard from "../components/NewsCard";
 import { useParams } from "react-router-dom";
 
-const NEWS_API_KEY = "5a414439830d46f1bd17deec3ee790c8"; 
+const NEWS_API_KEY = "9f6cb11aa987e6a04a64373cf8b4b03e"; 
 
 function CategoryPage() {
   const { category } = useParams();
@@ -10,15 +10,15 @@ function CategoryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  setLoading(true);
-  fetch(`/api/news?category=${category}`)
-    .then(res => res.json())
-    .then(data => {
-      setArticles(data.articles || []);
-      setLoading(false);
-    })
-    .catch(() => setLoading(false));
-}, [category]);
+    setLoading(true);
+    fetch(`https://gnews.io/api/v4/top-headlines?category=${category}&apikey=${NEWS_API_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        setArticles(data.articles || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [category]);
 
   return (
     <div style={{ padding: 28 }}>
