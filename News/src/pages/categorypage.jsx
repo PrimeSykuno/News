@@ -10,15 +10,15 @@ function CategoryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${NEWS_API_KEY}&pageSize=9`)
-      .then(res => res.json())
-      .then(data => {
-        setArticles(data.articles || []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [category]);
+  setLoading(true);
+  fetch(`/api/news?category=${category}`)
+    .then(res => res.json())
+    .then(data => {
+      setArticles(data.articles || []);
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+}, [category]);
 
   return (
     <div style={{ padding: 28 }}>
