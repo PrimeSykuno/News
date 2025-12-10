@@ -19,6 +19,7 @@ function CategoryPage() {
     })
     .catch(() => setLoading(false));
 }, [category]);
+
   return (
     <div style={{ padding: 28 }}>
       <h2 style={{ marginBottom: 18, textTransform: "capitalize" }}>{category}</h2>
