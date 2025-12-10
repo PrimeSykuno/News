@@ -1,7 +1,6 @@
-// api/news.js
 import fetch from "node-fetch";
 
-const NEWS_API_KEY = "5a414439830d46f1bd17deec3ee790c8"
+const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
 export default async function handler(req, res) {
   const category = req.query.category || "general";
