@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import NewsCard from "../components/NewsCard";
 import { useParams } from "react-router-dom";
 
-const NEWS_API_KEY = "9f6cb11aa987e6a04a64373cf8b4b03e"; 
+const NEWS_API_KEY = "5a414439830d46f1bd17deec3ee790c8"; 
 
 function CategoryPage() {
   const { category } = useParams();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`https://gnews.io/api/v4/top-headlines?category=${category}&apikey=${NEWS_API_KEY}`)
+useEffect(() => {
+    fetch(`/api/news?category=${category}`)
       .then(res => res.json())
-      .then(data => {
-        setArticles(data.articles || []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      .then(data => setArticles(data.articles))
+      .catch(err => console.error(err));
   }, [category]);
 
   return (
