@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NewsCard from "../components/NewsCard";
+import NewsCard from "../components/Newscard";
 import { useParams } from "react-router-dom";
 
 const NEWS_API_KEY = "5a414439830d46f1bd17deec3ee790c8"; 
@@ -8,13 +8,17 @@ function CategoryPage() {
   const { category } = useParams();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-useEffect(() => {
-    fetch(`/api/news?category=${category}`)
-      .then(res => res.json())
-      .then(data => setArticles(data.articles))
-      .catch(err => console.error(err));
-  }, [category]);
 
+  useEffect(() => {
+  setLoading(true);
+  fetch(`/api/news?category=${category}`)
+    .then(res => res.json())
+    .then(data => {
+      setArticles(data.articles || []);
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+}, [category]);
   return (
     <div style={{ padding: 28 }}>
       <h2 style={{ marginBottom: 18, textTransform: "capitalize" }}>{category}</h2>
